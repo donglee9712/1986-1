@@ -1,0 +1,107 @@
+.people-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--section-pad-block) clamp(16px, 4vw, 32px);
+}
+
+
+
+
+.people-page .peoples {
+  width: 100%;
+  max-width: 1800px;
+  margin: 30px auto 0;
+  padding: 0;
+  background: transparent;
+  text-align: center;
+}
+
+.people-page .peoples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1500px;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.people-page .peoples-card {
+  width: 100%;
+  margin: 0;
+  padding: 20px 20px 30px 20px;
+  background: #ffffff;
+  border-radius: 32px;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  justify-items: center;
+  text-align: center;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
+  transition: transform 0.45s ease-out, box-shadow 0.3s ease-out, opacity 0.5s ease-out;
+  transition-delay: 0ms, 0ms, var(--reveal-delay, 0ms);
+}
+
+.people-page .peoples-image {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.people-page .peoples-image img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.people-page .peoples-card.reveal-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.people-page .peoples-card.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .people-page .peoples-card:hover {
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.people-page .peoples-body {
+  padding: clamp(20px, 3vw, 28px) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  word-break: keep-all;
+  overflow: visible;
+}
+
+@media (max-width: 900px) {
+  .people-page .peoples-card {
+    grid-template-columns: 1fr;
+  }
+
+  .people-page .peoples-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 720px) {
+  .people-main {
+    padding: var(--section-pad-block) var(--section-pad-inline);
+  }
+
+}

@@ -1,0 +1,218 @@
+/* Work tabs base */
+.work-tabs {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4.75px;
+  margin: 0;
+  padding: 10px calc(4.75px + 2px);
+  position: relative;
+  overflow: visible;
+  background: linear-gradient(80deg, #ffffff, rgb(243, 243, 243));
+  border-radius: 999px;
+  border: 1px solid rgba(20, 17, 14, 0.18);
+}
+
+/* Active indicator */
+.work-tabs::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: calc(100% - 9.5px);
+  width: var(--indicator-width, 0);
+  transform: translate(var(--indicator-x, 0), -50%);
+  border-radius: 999px;
+  background:  #ff7f00;
+  box-shadow: 0 12px 24px rgba(26, 26, 28, 0.18);
+  opacity: var(--indicator-opacity, 0);
+  transition: width 0.35s ease, transform 0.35s ease, opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Tabs */
+.work-tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  font-weight: 600;
+  color: #111111;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease;
+  line-height: 1;
+}
+
+.work-tab:hover {
+  color: #ff7f00;
+}
+
+.work-tab.is-active {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.work-tab:focus-visible {
+  outline: 2px solid #ff7f00;
+  outline-offset: 3px;
+}
+
+body.is-drawer-open {
+  overflow: hidden;
+}
+
+.work-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.work-drawer.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.work-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 12, 12, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.work-drawer__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 90vw;
+  max-width: 92vw;
+  background: #ffffff;
+  box-shadow: 28px 0 80px rgba(0, 0, 0, 0.18);
+  transform: translateX(100%);
+  transition: transform 0.9s ease;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.work-drawer.is-open .work-drawer__panel {
+  transform: translateX(0);
+}
+
+.work-drawer__frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+}
+
+.work-drawer__panel .footer-modal__close {
+  left: 16px;
+  right: auto;
+}
+
+.work-drawer__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #111111;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.work-drawer__loading.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.work-drawer__spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  border-top-color: #111111;
+  animation: work-drawer-spin 1.17s linear infinite;
+}
+
+@keyframes work-drawer-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tablet + mobile layout */
+@media (max-width: 1024px) {
+  .work-tabs {
+    justify-content: center;
+    gap: 4.75px;
+    padding: 10px calc(4.75px + 2px);
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: none;
+    z-index: 20;
+  }
+
+  .work-tab {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 8px 18px;
+  }
+
+  .work-tabs.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(12px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .work-drawer__panel {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Spacing helpers */
+@media (max-width: 1024px) and (min-width: 721px) {
+  main.work-page {
+    /* Tablet: match new-home-section bottom padding */
+    --work-bottom-gap: var(--section-pad-block);
+  }
+}
+
+@media (max-width: 720px) {
+  main.work-page {
+    /* Mobile: base 60px + responsive tab clearance */
+    --work-bottom-gap: var(--section-pad-block);
+  }
+
+  .work-tabs {
+    width: calc(100vw - 16px);
+    max-width: none;
+    padding: 8px calc(6px + 2px);
+    justify-content: space-between;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .work-tab {
+    flex: 0 1 auto;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}

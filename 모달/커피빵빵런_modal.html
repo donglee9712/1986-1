@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko" class="modal-open">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Original Sections</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body class="modal-open">
+    <div class="modal-overlay">
+      <div class="modal-shell" role="dialog" aria-modal="true" aria-label="Original modal">
+        <button class="footer-modal__close" type="button" aria-label="닫기">&times;</button>
+        <main class="work-page">
+          <section id="bbang-run" class="section">
+            <div class="section-hero">
+              <iframe
+                src="https://www.youtube.com/embed/l4wqt2Uh3eA?autoplay=1&mute=1&playsinline=1&loop=1&playlist=l4wqt2Uh3eA"
+                title="커피빵빵런"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="section-body">
+              <div class="section-title-row">
+                <h1 style="text-align: left; line-height: -1.8;">커피 빵빵런</h1>
+                <a class="section-instagram" href="https://www.instagram.com/coffeebbangbbangrun" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" fill="none" stroke="currentColor" stroke-width="1.6" />
+                    <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+                    <circle cx="17" cy="7.8" r="1.2" fill="currentColor" />
+                  </svg>
+                </a>
+              </div>
+              <p style="text-align: left"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);"><strong><span style="font-size: 19px;">커피는 살 안 쪄!</span></strong></span></p>
+              <p style="text-align: left"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);"><strong><span style="font-size: 19px;">살찌는 건 싫지만, 빵은 먹고 싶어!</span></strong></span></p>
+              <div style="margin: 10px 0;"></div>
+              <p class="section-description" style="text-align: left;"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);">
+                맛있는 빵을 먹기 위해서라면 어디든지 달려가는 빵둥이들이 빵과 환상적인 조합인 커피를 찾아
+                도착한 곳은 바로 커피의 도시 ‘강릉’ 이였어요.
+                <br /><br />
+                완주하면 달콤한 크림 도넛과 엄성된 강릉 로컬 카페 사장님들이 직접 내려주는 커피를 맛볼 수 있어요.
+                커피를 못마시는 분들을 위해서 에이드도 준비했구요. 
+                <br /><br />
+                경포 호수공원의 소나무숲과 경포 호수를 바라보며 달리는 최고의 러닝 코스! 빵빵런과 마찬가지로 참가비 일부로 강릉지역 아동센터에 착한 기부도 진행했습니다.   
+              </span></p>
+
+              <div style="margin: 30px 0;"></div>
+              <h4 style="text-align: left; line-height: -1.8;">BEFORE</h4>
+
+              <section class="work-grid" aria-label="Poster gallery">
+                <article class="work-card-item">
+                  <div class="work-card">
+                    <a class="work-card__link" href="https://1986.imweb.me/250601"><div class="work-card__image" aria-hidden="true" style="--card-bg: url('https://cdn.imweb.me/thumbnail/20250618/f552c88cd8810.png');"></div></a>
+                  </div>
+                  <p style="text-align: center"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);"><strong>커피 빵빵런 in 강릉</strong></span></p>
+                </article>
+              </section>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <div class="work-drawer" aria-hidden="true">
+      <div class="work-drawer__backdrop" data-drawer-close></div>
+      <div class="work-drawer__panel" role="dialog" aria-modal="true" aria-label="Project detail">
+        <button class="work-drawer__close footer-modal__close" type="button" data-drawer-close aria-label="닫기">&times;</button>
+        <div class="work-drawer__loading" aria-hidden="true">
+          <div class="work-drawer__spinner"></div>
+        </div>
+        <iframe class="work-drawer__frame" title="Project detail"></iframe>
+      </div>
+    </div>
+    <script>
+      (() => {
+        const grid = document.querySelector(".work-grid");
+        const drawer = document.querySelector(".work-drawer");
+        if (!grid || !drawer) return;
+
+        const closeTargets = drawer.querySelectorAll("[data-drawer-close]");
+        const frame = drawer.querySelector(".work-drawer__frame");
+        const loading = drawer.querySelector(".work-drawer__loading");
+
+        const openDrawer = (url) => {
+          loading.classList.add("is-active");
+          drawer.classList.add("is-open");
+          drawer.setAttribute("aria-hidden", "false");
+          document.body.classList.add("is-drawer-open");
+          frame.src = url;
+        };
+
+        const closeDrawer = () => {
+          drawer.classList.remove("is-open");
+          drawer.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("is-drawer-open");
+          frame.src = "";
+          loading.classList.remove("is-active");
+        };
+
+        grid.addEventListener("click", (event) => {
+          const link = event.target.closest(".work-card__link");
+          if (!link) return;
+          event.preventDefault();
+          openDrawer(link.href);
+        });
+
+        closeTargets.forEach((target) => target.addEventListener("click", closeDrawer));
+        frame.addEventListener("load", () => loading.classList.remove("is-active"));
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && drawer.classList.contains("is-open")) {
+            closeDrawer();
+          }
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const closeBtn = document.querySelector(".footer-modal__close");
+        if (!closeBtn) return;
+        closeBtn.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: "close-modal" }, "*");
+          }
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const grid = document.querySelector(".work-grid");
+        if (!grid) return;
+        grid.addEventListener("click", (event) => {
+          const link = event.target.closest(".work-card__link");
+          if (!link) return;
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: "open-drawer", url: link.href }, "*");
+          }
+        }, true);
+      })();
+    </script>
+  </body>
+</html>

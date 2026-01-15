@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko" class="modal-open">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Original Sections</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body class="modal-open">
+    <div class="modal-overlay">
+      <div class="modal-shell" role="dialog" aria-modal="true" aria-label="Original modal">
+        <button class="footer-modal__close" type="button" aria-label="닫기">&times;</button>
+        <main class="work-page">
+          <section id="bbang-run" class="section">
+            <div class="section-hero section-hero--player" aria-label="댕댕컨퍼런스 이미지 슬라이드">
+              <div class="hero-slide is-1" style="background-image: url('https://cdn.imweb.me/thumbnail/20200513/c37c4cc57bc18.jpg');"></div>
+              <div class="hero-slide is-2" style="background-image: url('https://cdn.imweb.me/thumbnail/20200513/c37c4cc57bc18.jpg');"></div>
+              <div class="hero-slide is-3" style="background-image: url('https://cdn.imweb.me/thumbnail/20200513/68b70186cfc83.jpg');"></div>
+              <div class="hero-slide is-4" style="background-image: url('https://cdn.imweb.me/thumbnail/20200513/2f81b51cec876.jpg');"></div>
+            </div>
+            <div class="section-body">
+              <div class="section-title-row">
+                <h1 style="text-align: left; line-height: -1.8;">댕댕이 컨퍼런스</h1>
+              </div>
+              <p style="text-align: left"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);"><strong><span style="font-size: 19px;">내사랑 댕댕이 탐구백서</span></strong></span></p>
+              <div style="margin: 10px 0;"></div>
+              <p class="section-description" style="text-align: left;"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);">
+                 올바른 반려견 문화를 정착하고 개선하기 위해 반려견 분야의 전문가들과 함께 고민하고 나누는 시간입니다. 
+                <br /><br />
+                꼭 알아야 할 동물법, 반려견과 사람이 공존할 수 있는 방법, 동물 보호 운동, 상처받은 유기견 이야기 등 
+                아프지만 꼭 알아야 할 다양한 주제들로 강연이 진행되었습니다. 
+              </span></p>
+
+              <div style="margin: 30px 0;"></div>
+              <h4 style="text-align: left; line-height: -1.8;">BEFORE</h4>
+
+              <section class="work-grid" aria-label="Poster gallery">
+                <article class="work-card-item">
+                  <div class="work-card">
+                    <a class="work-card__link" href="https://1986.imweb.me/190707"><div class="work-card__image" aria-hidden="true" style="--card-bg: url('https://cdn.imweb.me/thumbnail/20250102/480cb5f3b05e7.jpg');"></div></a>
+                  </div>
+                  <p style="text-align: center"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);"><strong>댕댕이 컨퍼런스 2019</strong></span></p>
+                </article>
+                <article class="work-card-item">
+                  <div class="work-card">
+                    <a class="work-card__link" href="https://1986.imweb.me/180811-12"><div class="work-card__image" aria-hidden="true" style="--card-bg: url('https://cdn.imweb.me/thumbnail/20250102/e972e95208940.jpg');"></div></a>
+                  </div>
+                  <p style="text-align: center"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);"><strong>댕댕이 컨퍼런스 2018</strong></span></p>
+                </article>
+              </section>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <div class="work-drawer" aria-hidden="true">
+      <div class="work-drawer__backdrop" data-drawer-close></div>
+      <div class="work-drawer__panel" role="dialog" aria-modal="true" aria-label="Project detail">
+        <button class="work-drawer__close footer-modal__close" type="button" data-drawer-close aria-label="닫기">&times;</button>
+        <div class="work-drawer__loading" aria-hidden="true">
+          <div class="work-drawer__spinner"></div>
+        </div>
+        <iframe class="work-drawer__frame" title="Project detail"></iframe>
+      </div>
+    </div>
+    <script>
+      (() => {
+        const grid = document.querySelector(".work-grid");
+        const drawer = document.querySelector(".work-drawer");
+        if (!grid || !drawer) return;
+
+        const closeTargets = drawer.querySelectorAll("[data-drawer-close]");
+        const frame = drawer.querySelector(".work-drawer__frame");
+        const loading = drawer.querySelector(".work-drawer__loading");
+
+        const openDrawer = (url) => {
+          loading.classList.add("is-active");
+          drawer.classList.add("is-open");
+          drawer.setAttribute("aria-hidden", "false");
+          document.body.classList.add("is-drawer-open");
+          frame.src = url;
+        };
+
+        const closeDrawer = () => {
+          drawer.classList.remove("is-open");
+          drawer.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("is-drawer-open");
+          frame.src = "";
+          loading.classList.remove("is-active");
+        };
+
+        grid.addEventListener("click", (event) => {
+          const link = event.target.closest(".work-card__link");
+          if (!link) return;
+          event.preventDefault();
+          openDrawer(link.href);
+        });
+
+        closeTargets.forEach((target) => target.addEventListener("click", closeDrawer));
+        frame.addEventListener("load", () => loading.classList.remove("is-active"));
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && drawer.classList.contains("is-open")) {
+            closeDrawer();
+          }
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const closeBtn = document.querySelector(".footer-modal__close");
+        if (!closeBtn) return;
+        closeBtn.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: "close-modal" }, "*");
+          }
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const grid = document.querySelector(".work-grid");
+        if (!grid) return;
+        grid.addEventListener("click", (event) => {
+          const link = event.target.closest(".work-card__link");
+          if (!link) return;
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: "open-drawer", url: link.href }, "*");
+          }
+        }, true);
+      })();
+    </script>
+  </body>
+</html>

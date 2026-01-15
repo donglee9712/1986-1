@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="naver-site-verification" content="4d26a0280f1c1ffd31a12d64488bd448d4131b2f" />
+    <meta name="naver-site-verification" content="f54d5d80dc3e21e684b4628dfc67605c29691b32" />
+    <meta name="description" content="빵빵런 ㅣ 빵트레일런 ㅣ 댕댕런 ㅣ 댕댕트레킹 ㅣ 먼지학교 ㅣ 문화기획 ㅣ 1986프로덕션" />
+    <title>1986프로덕션</title>
+    <style>
+
+      .popular-grid {
+        --card-gap: 16px;
+        --grid-pad: 20px;
+        max-width: 1500px;
+        margin: 0 auto;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: calc((100% - (var(--card-gap) * 4)) / 5);
+        gap: var(--card-gap);
+        padding: var(--grid-pad);
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-padding: var(--grid-pad);
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .popular-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .popular-card {
+        position: relative;
+        border-radius: 32px;
+        overflow: hidden;
+        display: flex;
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        transform: rotate(var(--card-rotation, 0deg));
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        scroll-snap-align: start;
+      }
+
+      .popular-card::after {
+        content: "자세히 보기";
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 40px;
+        padding: 0 20px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #ffffff;
+        font-size: inherit;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        pointer-events: none;
+      }
+
+      .popular-card:hover::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .popular-card:hover {
+        transform: scale(1.05) rotate(0deg);
+        box-shadow: 0 22px 42px rgba(0, 0, 0, 0.12);
+        z-index: 1;
+      }
+
+      .popular-card:hover::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .popular-grid .popular-card:nth-child(1) {
+        --card-rotation: -2deg;
+      }
+
+      .popular-grid .popular-card:nth-child(2) {
+        --card-rotation: -1deg;
+      }
+
+      .popular-grid .popular-card:nth-child(3) {
+        --card-rotation: 2deg;
+      }
+
+      .popular-grid .popular-card:nth-child(4) {
+        --card-rotation: -2deg;
+      }
+
+      .popular-grid .popular-card:nth-child(5) {
+        --card-rotation: 1.5deg;
+      }
+
+      .popular-grid .popular-card:hover {
+        transform: scale(1.05) rotate(0deg) !important;
+      }
+
+      .popular-card img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        display: block;
+      }
+
+      @media (max-width: 1024px) {
+        .popular-grid {
+          max-width: none;
+          padding: 12px 16px;
+          grid-auto-columns: calc((100% - (var(--card-gap) * 2)) / 3.2);
+          scroll-padding: 16px;
+        }
+
+        .popular-card {
+          scroll-snap-align: center;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .popular-grid {
+          padding: 12px 16px;
+          grid-auto-columns: calc(100% - 32px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="popular-grid">
+      <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20251218/13abbdd89b906.png" alt="" />
+      </article>
+
+      <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20250618/f552c88cd8810.png" alt="" />
+      </article>
+
+        <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20251211/60bd992e90028.png" alt="" />
+      </article>
+
+      <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20250102/8dbc32b1ab9b8.png" alt="" />
+      </article>
+
+            <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20250624/148b1fd8a7ee8.png" alt="" />
+      </article>
+
+    </section>
+        <script defer src="../styles/gallery-rotation.js"></script>
+<script>
+      (() => {
+        const container = document.querySelector(".popular-grid");
+        if (!container) return;
+        const cards = Array.from(container.querySelectorAll(".popular-card"));
+        if (!cards.length) return;
+
+        const centerToMiddle = () => {
+          if (!window.matchMedia("(max-width: 1024px)").matches) {
+            container.scrollLeft = 0;
+            return;
+          }
+          const target = cards[Math.floor(cards.length / 2)];
+          if (!target) return;
+          const offset =
+            target.offsetLeft + target.offsetWidth / 2 - container.clientWidth / 2;
+          container.scrollLeft = Math.max(0, offset);
+        };
+
+        const scheduleCenter = () => {
+          requestAnimationFrame(() => centerToMiddle());
+        };
+
+        if (document.readyState === "complete") {
+          scheduleCenter();
+        } else {
+          window.addEventListener("load", scheduleCenter);
+        }
+
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(scheduleCenter, 120);
+        });
+      })();
+    </script>
+  </body>
+</html>

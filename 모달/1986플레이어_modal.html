@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" class="modal-open">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Original Sections</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body class="modal-open">
+    <div class="modal-overlay">
+      <div class="modal-shell" role="dialog" aria-modal="true" aria-label="Original modal">
+        <button class="footer-modal__close" type="button" aria-label="닫기">&times;</button>
+        <main class="work-page">
+          <section id="bbang-run" class="section">
+            <div class="section-hero section-hero--player" style="--hero-slide-duration: 16s;" aria-label="1986플레이어 이미지 슬라이드">
+              <div class="hero-slide is-1" style="background-image: url('https://cdn.imweb.me/upload/S20200402f6a4097001dd3/07a83b8262fe7.jpeg');"></div>
+              <div class="hero-slide is-2" style="background-image: url('https://cdn.imweb.me/upload/S20200402f6a4097001dd3/378d859fbbe7e.jpeg');"></div>
+              <div class="hero-slide is-3" style="background-image: url('https://cdn.imweb.me/upload/S20200402f6a4097001dd3/9188564ce5e1c.jpeg');"></div>
+              <div class="hero-slide is-4" style="background-image: url('https://cdn.imweb.me/upload/S20200402f6a4097001dd3/97dcc6df4b070.jpeg');"></div>
+            </div>
+            <div class="section-body">
+              <div class="section-title-row">
+                <h1 style="text-align: left; line-height: -1.8;">1986플레이어</h1>
+                <a class="section-instagram" href="https://www.instagram.com/1986player" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" fill="none" stroke="currentColor" stroke-width="1.6" />
+                    <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+                    <circle cx="17" cy="7.8" r="1.2" fill="currentColor" />
+                  </svg>
+                </a>
+              </div>
+              <p style="text-align: left"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);"><strong><span style="font-size: 19px;">행사 기획과 운영을 직접 경험해볼 수 있는 1986프로덕션 서포터즈</span></strong></span></p>
+              <div style="margin: 10px 0;"></div>
+              <p class="section-description" style="text-align: left;"><span style="font-size: clamp(1rem, 1.2vw, 1.1rem);">
+                예비 행사기획자로써 1986프로덕션의 행사를 함께할 수 있는 대외활동
+                행사 기획 및 운영에 대한 교육을 듣고 1986프로덕션 행사 현장에 직접 참여할 수 있는 서포터즈 활동입니다.
+              </span></p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script>
+      (() => {
+        const closeBtn = document.querySelector(".footer-modal__close");
+        if (!closeBtn) return;
+        closeBtn.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: "close-modal" }, "*");
+          }
+        });
+      })();
+    </script>
+    <script>
+      (() => {
+        const grid = document.querySelector(".work-grid");
+        if (!grid) return;
+        grid.addEventListener("click", (event) => {
+          const link = event.target.closest(".work-card__link");
+          if (!link) return;
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: "open-drawer", url: link.href }, "*");
+          }
+        }, true);
+      })();
+    </script>
+  </body>
+</html>

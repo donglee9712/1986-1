@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="naver-site-verification" content="4d26a0280f1c1ffd31a12d64488bd448d4131b2f" />
+    <meta name="naver-site-verification" content="f54d5d80dc3e21e684b4628dfc67605c29691b32" />
+    <meta name="description" content="빵빵런 ㅣ 빵트레일런 ㅣ 댕댕런 ㅣ 댕댕트레킹 ㅣ 먼지학교 ㅣ 문화기획 ㅣ 1986프로덕션" />
+    <title>1986프로덕션</title>
+    <link rel="stylesheet" href="../styles/gallery.css" />
+  </head>
+  
+  <body>
+  <h2 style="text-align: center;">Made in 1986</h2>
+
+<p style="text-align: center;">테스트 형식</p>
+
+    <section class="popular-grid">
+      <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20251218/13abbdd89b906.png" alt="" />
+      </article>
+
+      <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20250618/f552c88cd8810.png" alt="" />
+      </article>
+
+      <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20251211/60bd992e90028.png" alt="" />
+      </article>
+
+      <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20250102/8dbc32b1ab9b8.png" alt="" />
+      </article>
+
+      <article class="popular-card">
+        <img src="https://cdn.imweb.me/thumbnail/20250624/148b1fd8a7ee8.png" alt="" />
+      </article>
+    </section>
+        <script defer src="../styles/gallery-rotation.js"></script>
+<script>
+      (() => {
+        const container = document.querySelector(".popular-grid");
+        if (!container) return;
+        const cards = Array.from(container.querySelectorAll(".popular-card"));
+        if (!cards.length) return;
+
+        const centerToMiddle = () => {
+          if (!window.matchMedia("(max-width: 1024px)").matches) {
+            container.scrollLeft = 0;
+            return;
+          }
+          const target = cards[Math.floor(cards.length / 2)];
+          if (!target) return;
+          const offset =
+            target.offsetLeft + target.offsetWidth / 2 - container.clientWidth / 2;
+          container.scrollLeft = Math.max(0, offset);
+        };
+
+        const scheduleCenter = () => {
+          requestAnimationFrame(() => centerToMiddle());
+        };
+
+        if (document.readyState === "complete") {
+          scheduleCenter();
+        } else {
+          window.addEventListener("load", scheduleCenter);
+        }
+
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(scheduleCenter, 120);
+        });
+      })();
+    </script>
+  </body>
+</html>
